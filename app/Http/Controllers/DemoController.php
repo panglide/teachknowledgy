@@ -20,7 +20,7 @@ class DemoController extends Controller
       $myGrade = 1;
 
       //Read PDF and extract text
-      $data = Pdf::getText('teachknowledgy/output.pdf', '/usr/local/bin/pdftotext');
+      $data = Pdf::getText('output.pdf', '/usr/local/bin/pdftotext');
       $stand = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
       $kStand = preg_split('/([K]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
       $kStandards = array_slice($kStand, 3);
