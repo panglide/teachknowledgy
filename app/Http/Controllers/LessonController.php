@@ -45,9 +45,9 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(Lesson $lesson)
+    public function show()
     {
-      
+      $lesson = Lesson::find(1);
         return view('lessons.show', compact('lesson'));
     }
 
