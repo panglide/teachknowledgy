@@ -47,8 +47,8 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-      $standard = request('title');
-        return view('lessons.show', compact('lesson', 'standard'));
+      
+        return view('lessons.show', compact('lesson'));
     }
 
     /**
