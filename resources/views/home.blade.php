@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                  <a href="{{ url('/standards') }}">
+                  <a href="{{url('lessons/demo')}}">
                     <button type="button" name="button" class="btn btn-primary">Standards</button>
                   </a>
                 </div>
