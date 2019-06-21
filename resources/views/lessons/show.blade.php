@@ -34,7 +34,7 @@
       </tr>
       <tr>
         <td>Standards:</td>
-        <td>{{$standard}}</td>
+        <td>{{ $standard->name }}</td>
       </tr>
       <tr>
         <td>Lesson Objective</td>

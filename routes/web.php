@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
 Route::get('/resources', function (){
   return view('resources.demo');
 });
@@ -30,7 +33,7 @@ Route::get('/centers', function(){
   return view('centers/demo');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -38,14 +41,14 @@ Route::get('/standards', 'StandardController@index');
 
 Route::get('/demo', 'DemoController@index');
 
-Route::get('lessons/demo', 'LessonController@show');
+Route::get('/lessons/demo', 'LessonController@show');
 
-Route::get('assessments/1', 'AssessmentController@show');
+Route::get('/assessments/1', 'AssessmentController@show');
 
 Route::get('/guided_exercise', function(){
   return view('exercises/guided_exercises/demo');
 });
 
 Route::get('/independent_exercise', function(){
-  return view('exercises/independent_exercises/demo');
+  return view('/exercises/independent_exercises/demo');
 });

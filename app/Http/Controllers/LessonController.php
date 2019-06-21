@@ -47,8 +47,9 @@ class LessonController extends Controller
      */
     public function show()
     {
+      $standard = Standard::find(1);
       $lesson = Lesson::find(1);
-        return view('lessons.show', compact('lesson'));
+        return view('lessons.show', compact('lesson', 'standard'));
     }
 
     /**
