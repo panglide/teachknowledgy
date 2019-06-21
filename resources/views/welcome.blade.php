@@ -79,10 +79,7 @@
               font-weight: 300;
           }
 
-          @media screen and (min-device-width : 1080px)
-                        and (max-device-width : 1920px)
-                        and (min-resolution: 401dpi)
-                        and (device-aspect-ratio:16/9) {
+          @media screen and (max-device-width : 1080px) {
             .title {
               font-size: 45px;
               font-weight: 400;
