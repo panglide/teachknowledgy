@@ -79,7 +79,9 @@
               font-weight: 300;
           }
 
-          @media screen and (max-device-width : 1080px) {
+          @media only screen
+          and (min-device-width : 375px)
+          and (max-device-width : 667px) {
             .title {
               font-size: 45px;
               font-weight: 400;
