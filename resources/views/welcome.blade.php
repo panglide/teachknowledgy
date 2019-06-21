@@ -79,7 +79,7 @@
               font-weight: 300;
           }
 
-          @media screen and (max-width: 420px){
+          @media screen and (max-width: 600px){
             .title {
               font-size: 45px;
               font-weight: 400;
