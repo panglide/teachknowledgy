@@ -82,6 +82,20 @@
           @media only screen
           and (min-device-width : 375px)
           and (max-device-width : 667px) {
+            .parallax {
+              /* The image used */
+              background-image: url('teachknowledgy.jpg');
+
+              /* Full height */
+              height: 100vh;
+
+              /* Create the parallax scrolling effect */
+              background-attachment: scroll;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+              }
+
             .title {
               font-size: 45px;
               font-weight: 400;
