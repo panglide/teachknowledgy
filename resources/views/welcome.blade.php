@@ -157,7 +157,7 @@
           This web based application acts as a layer of software that sits between the teacher and the students, the teacher and the administrators, the teacher
           and the grade book.  It attempts to autonmously collect meaningful data, generate meaningful reports, and track classroom progress toward
           proficiency related to state and district learning standards in real time.  The data input is programmatically performed by the system and the
-          classroom teacher is free to give 100% of their attention to the students. <div class="links"><a href="{{url('demo')}}">Click for a demo!</a></div>
+          classroom teacher is free to give 100% of their attention to the students. <div class="links"><a href="{{url('lessons/demo')}}">Click for a demo!</a></div>
         </p>
         <br/>
         <h4>What Teachknowledgy doesn't do.</h4>
