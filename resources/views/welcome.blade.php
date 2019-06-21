@@ -115,7 +115,7 @@
           <div class="links">
             <a href="{{url('login')}}">Login</a>
             <a href="{{url('register')}}">Register</a>
-            <a href="{{url('demo')}}">Demo</a>
+            <a href="{{url('lessons/demo')}}">Demo</a>
           </div>
 
         </div>
