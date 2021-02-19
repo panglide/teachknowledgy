@@ -75,23 +75,11 @@
                                 <label class="form-check-label" for="third grade">3</label>&nbsp;
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="4" name="gradeLevel">
                                 <label class="form-check-label" for="fourth grade">4</label>&nbsp;
-                                <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="5" name="gradeLevel">
-                                <label class="form-check-label" for="fifth grade">5</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="6" name="gradeLevel">
-                                <label class="form-check-label" for="sixth grade">6</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="7" name="gradeLevel">
-                                <label class="form-check-label" for="seventh grade">7</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="8" name="gradeLevel">
-                                <label class="form-check-label" for="eighth grade">8</label>&nbsp; -->
-                                <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="9" name="gradeLevel">
-                                <label class="form-check-label" for="ninth grade">9</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="10" name="gradeLevel">
-                                <label class="form-check-label" for="tenth grade">10</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="11" name="gradeLevel">
-                                <label class="form-check-label" for="eleventh grade">11</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="12" name="gradeLevel">
-                                <label class="form-check-label" for="twelth grade">12</label> -->
                               </div>
+                        </div>
+                        <div class="form-group row">
+                            <input class="form-control" type="text" name="subject" placeholder="ELA, Math, Science, SS, All" />
+                            <label class="form-check-label" for="subject"></label>
                         </div>
 
                         <div class="form-group row mb-0">
