@@ -6,6 +6,7 @@ use App\Lesson;
 use App\Standard;
 use Illuminate\Http\Request;
 use App\User;
+use App\Standard;
 
 class LessonController extends Controller
 {
@@ -46,12 +47,15 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Standard $standard)
     {
-    $teacher = User::find(1);
+
+        $teacher = User::find(1);
       
-      $lesson = Lesson::find(1);
-    //   dd($lesson);
+        $lesson = Lesson::find(1);
+
+        $standard = Standard::find(1);
+   
         return view('lessons.show', compact('lesson', 'teacher'));
     }
 

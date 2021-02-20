@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use App\Demo;
 use App\Standard;
 use Spatie\PdfToText\Pdf;
@@ -15,61 +15,49 @@ class DemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Standard $standard)
+    public function index(Standard $standard, User $user)
     {
-      $myGrade = 1;
+      $teacher = User::find(1);
+      $gradeLevel = $user->gradeLevel;
+      $subject = $teacher->subject;
+      
+      //Go get Subject and Grade Specific PDF from TN Gov
+      $url = 'https://www.tn.gov/content/dam/tn/education/standards/math/Standards_Support_grade_'. $gradeLevel .'_Mathematics.pdf';
+
+      $filename = basename($url);
+      
+      $result = file_put_contents($filename, file_get_contents($url));
+
+      
 
       //Read PDF and extract text
-      $data = (new Pdf())->setPdf('output.pdf')->text();
-      $stand = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
-      $kStand = preg_split('/([K]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
-      $kStandards = array_slice($kStand, 3);
-      $standards = array_slice($stand, 3);
+      $data = Pdf::getText('../public/'.$filename, '/usr/local/bin/pdftotext');
+      $stand = preg_split('/\n|\n/', $data);
+      
 
 
-      foreach ($standards as $key => $standard ) {
-        if($key % 2 === 0) {
-            $Keys[] = $standard[0];
-        } else {
-            $Values[] = $standard[0];
+      $standard_names;
+      
+      foreach($stand as $key => $val) {
+        if( preg_match('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $val ) ) {
+          $standard_names[] = $val;
         }
-       }
-
-      foreach ($kStandards as $key => $standard ) {
-        if($key % 2 === 0) {
-            $KKeys[] = $standard[0];
-        } else {
-            $KValues[] = $standard[0];
-        }
-       }
-
-       foreach(array_combine($KKeys, $KValues) as $key=>$value){
-         $KArray[$key] = $value;
-       }
-
-
-         //combine Keys and Values arrays into one associative array
-      foreach(array_combine($Keys, $Values) as $key=>$value){
-        $completeArray[$key] = $value;
       }
 
 
-      if($myGrade == 0){
-        $results = array_filter($KArray, function($key) use($myGrade){
-          return $key == $myGrade;
-        }, ARRAY_FILTER_USE_KEY);
+      
+      $standard_domains;
+
+      foreach( $standard_names as $k => $v) {
+        if( strpos( $v, "Standard" ) ) {
+          $standard_domains[] = substr( $v, 9, 9 );
+        }
       }
-      else {
 
-      $results = array_filter($completeArray, function($key) use($myGrade){
-        return $key == $myGrade;
-      }, ARRAY_FILTER_USE_KEY);
-    }
-
-    $lesson = Lesson::find(1);
+      dd($standard_domains);
 
         // send filtered array to view
-        return view('demo.index', compact('results', 'lesson'));
+        return view('demo.index', compact('result', 'lesson'));
 
   }
 
