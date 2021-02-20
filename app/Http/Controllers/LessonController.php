@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lesson;
 use App\Standard;
 use Illuminate\Http\Request;
+use App\User;
 
 class LessonController extends Controller
 {
@@ -45,11 +46,13 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(User $user)
     {
-      $standard = Standard::find(1);
+    $teacher = User::find(1);
+      
       $lesson = Lesson::find(1);
-        return view('lessons.show', compact('lesson', 'standard'));
+    //   dd($lesson);
+        return view('lessons.show', compact('lesson', 'teacher'));
     }
 
     /**
