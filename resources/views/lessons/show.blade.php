@@ -6,11 +6,11 @@
 <table class="table">
       <tr>
         <td>Teacher Name:</td>
-        <td>Jane Doe</td>
+        <td>{{ $teacher->name }}</td>
       </tr>
       <tr>
         <td>Class:</td>
-        <td>1st Grade Math</td>
+        <td>{{ $teacher->gradeLevel }} {{ $teacher->subject }}</td>
       </tr>
       <tr>
         <td>Course Unit:</td>
@@ -34,7 +34,7 @@
       </tr>
       <tr>
         <td>Standards:</td>
-        <td>{{ $standard->name }}</td>
+        <td></td>
       </tr>
       <tr>
         <td>Lesson Objective</td>
