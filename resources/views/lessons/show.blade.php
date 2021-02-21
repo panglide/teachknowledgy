@@ -10,11 +10,11 @@
       </tr>
       <tr>
         <td>Class:</td>
-        <td>{{ $teacher->gradeLevel }} {{ $teacher->subject }}</td>
+        <td>{{ $class }}</td>
       </tr>
       <tr>
         <td>Course Unit:</td>
-        <td>Solving Addition and Subtraction Situations to 10</td>
+        <td>Hard coded unit</td>
       </tr>
       <tr>
         <td>Lesson Title</td>
@@ -34,14 +34,12 @@
       </tr>
       <tr>
         <td>Standards:</td>
-        <td></td>
+        <td>{{ $standard[0] }}</td>
       </tr>
       <tr>
         <td>Lesson Objective</td>
         <td>
-          <p>Move students from concrete mathematical operations of addition and subtraction within 10
-            to more abstract written mathematical operations.
-          </p>
+          <p>{{ $standard[1] }}</p>
         </td>
       </tr>
       <tr>

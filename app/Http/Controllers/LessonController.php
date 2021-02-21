@@ -6,7 +6,6 @@ use App\Lesson;
 use App\Standard;
 use Illuminate\Http\Request;
 use App\User;
-use App\Standard;
 
 class LessonController extends Controller
 {
@@ -56,7 +55,7 @@ class LessonController extends Controller
 
         $standard = Standard::find(1);
    
-        return view('lessons.show', compact('lesson', 'teacher'));
+        // return view('lessons.show', compact('lesson', 'teacher'));
     }
 
     /**

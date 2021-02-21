@@ -39,8 +39,6 @@ Route::get('/standards', 'StandardController@index');
 
 Route::get('/demo', 'DemoController@index');
 
-Route::get('/lessons/demo', 'LessonController@show');
-
 Route::get('/assessments/1', 'AssessmentController@show');
 
 // Route::get('/guided_exercise', function(){
