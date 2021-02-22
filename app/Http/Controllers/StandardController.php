@@ -15,59 +15,77 @@ class StandardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index(Standard $standard, User $user, Lesson $lesson)
     {
-      $myGrade = auth()->user()->gradeLevel;
+      
+      $teacher = User::find(1);
+      $gradeLevel = 5;
+      $subject = $teacher->subject;
+      
+      
+    //Go get Subject and Grade Specific PDF from TN Gov
+      $url = 'https://www.tn.gov/content/dam/tn/education/standards/math/Standards_Support_grade_'. $gradeLevel .'_Mathematics.pdf';
+
+      $filename = basename($url);
+      
+      $result = file_put_contents($filename, file_get_contents($url));
+
+      
+
+    //Read PDF and extract text
+      $data = Pdf::getText('../public/'.$filename, '/usr/local/bin/pdftotext');
     
-      //Read PDF and extract text
-      $data = Pdf::getText('kindergarten/mathunit1.pdf', '/usr/local/bin/pdftotext');
-      $stand = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
-      $kStand = preg_split('/([K]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
-      $kStandards = array_slice($kStand, 3);
-      $standards = array_slice($stand, 3);
+      $standards_arrays = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
+
+      $str = $standards_arrays[0];
+      $needle = substr($str, 0, 1 );
+      $start = strpos( $str, $needle );
+      $end = strpos( $str, "\n" );  
+      $length = $end - $start;
+      $class = substr( $str, $start, $length); 
+
+      $test = preg_replace('/\n/', '', $standards_arrays);
+
     
-    
-      foreach ($standards as $key => $standard ) {
-        if($key % 2 === 0) {
-            $Keys[] = $standard[0];
-        } else {
-            $Values[] = $standard[0];
+    // Get the Standard names
+      foreach( $test as $key => $val ) {      
+        if( preg_match('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $val ) ) {
+          if( substr( $val, 0, 1 ) == $gradeLevel ) {
+            $names[] = $val;
+          }
         }
-       }
-    
-      foreach ($kStandards as $key => $standard ) {
-        if($key % 2 === 0) {
-            $KKeys[] = $standard[0];
-        } else {
-            $KValues[] = $standard[0];
-        }
-       }
-    
-       foreach(array_combine($KKeys, $KValues) as $key=>$value){
-         $KArray[$key] = $value;
-       }
-    
-    
-         //combine Keys and Values arrays into one associative array
-      foreach(array_combine($Keys, $Values) as $key=>$value){
-        $completeArray[$key] = $value;
       }
-    
-    
-      if($myGrade == 0){
-        $results = array_filter($KArray, function($key) use($myGrade){
-          return $key == $myGrade;
-        }, ARRAY_FILTER_USE_KEY);
+     
+      
+      $names = array_unique($names, SORT_STRING);
+      $names = array_values($names);
+  
+   
+    // Get the Standard objectives 
+    foreach( $standards_arrays as $data ) {
+      if( preg_match( '/\bMajor Work of the Grade\b/', $data ) || preg_match( '/\bSupporting Content\b/', $data ))  {
+
+        $string = preg_replace('/\n/', '', $data);
+        $needle = ")";
+        $start = strpos( $string, $needle);
+        $end = strpos( $string, "Evidence" );  
+        $length = $end - $start;
+        
+        $objectives[] = substr( $string, $start + 1, $length - 1); 
       }
-      else {
-    
-      $results = array_filter($completeArray, function($key) use($myGrade){
-        return $key == $myGrade;
-      }, ARRAY_FILTER_USE_KEY);
     }
     
+    //Create associative array of Standards
+    for($i = 0; $i < count($names); $i++) {
+      $arr[] = [ $names[$i], $objectives[$i] ];
+    }
+      
     
-    $results = Standard::find(1);
+    $lesson = Lesson::find(1);
+      
+    foreach( $arr as $standards ) {
+      $standard = $standards;
+    }
 
         // send filtered array to view
         return view('standards.index', compact('results'));
