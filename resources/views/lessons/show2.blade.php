@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-<h1>Lesson Page</h1>
+<h1>Demo Lesson Page</h1>
 
 <table class="table">
       <tr>
         <td>Teacher Name:</td>
-        <td>Jane Doe</td>
+        <td>{{ $teacher->name }}</td>
       </tr>
       <tr>
         <td>Class:</td>
-        <td>1st Grade Math</td>
+        <td>{{ $teacher->gradeLevel }} {{ $teacher->subject }}</td>
       </tr>
       <tr>
         <td>Course Unit:</td>
@@ -18,14 +18,14 @@
       </tr>
       <tr>
         <td>Lesson Title</td>
-        <td>This Is The Title</td>
+        <td>{{ $lesson->name }}</td>
       </tr>
       <tr>
         <td>Lesson Overview</td>
         <td>
           <p>Students will be given math mats.  They will have varying containers marked with single digits
             that hold the corresponding number of ones cubes.  They will match the various containers
-            to teacher provided alrogrithms, pour the ones cubes onto the math mat and line them up
+            to teacher provided algorithms, pour the ones cubes onto the math mat and line them up
             to produce the sum of 10 and check their work by
             comparing that to a provided 10s rod.  Students will then be asked to write their own
             algorithms and test them with the ones cubes and tens rods.
@@ -34,19 +34,20 @@
       </tr>
       <tr>
         <td>Standards:</td>
-        <td>This is the standard</td>
+       
+        <td>{{ $standard->name }}</td>
+       
       </tr>
       <tr>
         <td>Lesson Objective</td>
         <td>
-          <p>Move students from concrete mathematical operations of addition and subtraction within 10
-            to more abstract written mathematical operations.
+          <p>{{ $standard->description }}
           </p>
         </td>
       </tr>
       <tr>
         <td>Assessment/Evaluation</td>
-        <td><a href="{{url('assessments/1')}}">Asssessment 1</a>, <a href="#">Asssessment 2</a>, <a href="#">Asssessment 3</a></td>
+        <td><a href="{{url('assessments/1')}}">Assessment 1</a>, <a href="#">Assessment 2</a>, <a href="#">Assessment 3</a></td>
       </tr>
       <tr>
         <td>Materials</td>
@@ -64,13 +65,13 @@
       <tr>
         <td>Instructions</td>
         <td>
-          <p>Step one: read the <a href="{{url('hook')}}">riddle</a> to students</p>
+          <p>Step one: read the to students</p>
           <p>Step two: Introduce logic puzzle</p>
           <p>Step three: Model the exercise using ones cubes, tens rods, math mats, and algorithms.</p>
           <p>Step four: Allow students to try.</p>
           <p>Step five: Regroup and model again.</p>
           <p>Step six: Monitor students as they try again.</p>
-          <p>Step seven: Regroup and model writing alrogrithms.</p>
+          <p>Step seven: Regroup and model writing algorithms.</p>
           <p>Step eight: Allow students to try.</p>
           <p>Step nine: Regroup and model again.</p>
           <p>Step ten: Monitor as students try again</p>
@@ -82,16 +83,15 @@
       </tr>
       <tr>
         <td>Resources</td>
-        <td><a href="#">Resource 1</a>, <a href="#">Resource 2</a>, <a href="#">Resource 3</a>, <a href="#">Resource 4</a>
-        </td>
+        <td><a href="{{url('/resources')}}">Resources</a></td>
       </tr>
       <tr>
         <td>Guided Practice</td>
-        <td><a href="#">Exercise 1</a></td>
+        <td><a href="{{ url('guided_exercise')}}">Exercise 1</a></td>
       </tr>
       <tr>
         <td>Independent Practice</td>
-        <td><a href="#">Exercise 1</a></td>
+        <td><a href="{{ url('independent_exercise')}}">Exercise 1</a></td>
       </tr>
       <tr>
         <td>Closure</td>
@@ -105,13 +105,13 @@
         </td>
       </tr>
       <tr>
-        <td>Cross Curricular Connections</td><td>Grouping, adding, alrogrithms, checking work</td>
+        <td>Cross Curricular Connections</td><td>Grouping, adding, algorithms, checking work</td>
       </tr>
       <tr>
-        <td>Remediation Lesson</td><td><a href="#">Reteach</a>, <a href="#">Counting by ones</a></td>
+        <td>Remediation Lesson</td><td><a href="{{url('/remediation_lesson')}}">Counting by ones</a></td>
       </tr>
       <tr>
-        <td>Extension Lesson</td><td><a href="#">Addition to 20</a>, <a href="#">Logic puzzles</a></td>
+        <td>Extension Lesson</td><td><a href="{{url('/extension_lesson')}}">Addition to 20</a>, <a href="#">Logic puzzles</a></td>
       </tr>
       <tr>
         <td>Small Groups</td>
@@ -132,10 +132,7 @@
       </tr>
       <tr>
         <td>Math Center Activities</td>
-        <td><a href="#">Station 1</a>, <a href="#">Station 2</a>, <a href="#">Station 3</a>, <a href="#">Station 4</a>, <a href="#">Station 5</a></td>
+        <td><a href="{{url('/centers')}}">Station 1</a>, <a href="#">Station 2</a>, <a href="#">Station 3</a>, <a href="#">Station 4</a>, <a href="#">Station 5</a></td>
       </tr>
-
-
-
 </table>
 @endsection

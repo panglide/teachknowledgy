@@ -46,13 +46,14 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Lesson $lesson, Standard $standard)
     {
     $teacher = User::find(1);
       
       $lesson = Lesson::find(1);
+      $standard = Standard::find(1);
     //   dd($lesson);
-        return view('lessons.show', compact('lesson', 'teacher'));
+        return view('lessons.show2', compact('lesson', 'teacher', 'standard'));
     }
 
     /**

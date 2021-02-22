@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Classroom;
+use App\Lesson;
+use App\User;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -12,9 +14,10 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Classroom $classroom)
     {
-        //
+        $classrooms = Classroom::all();
+        return(route('classrooms.index', compact( 'classrooms' ) ) );
     }
 
     /**
@@ -44,9 +47,11 @@ class ClassroomController extends Controller
      * @param  \App\Classroom  $classroom
      * @return \Illuminate\Http\Response
      */
-    public function show(Classroom $classroom)
+    public function show(Classroom $classroom, Lesson $lesson)
     {
-        //
+        $lessons = Lesson::all();
+
+        return view('classrooms.show', compact('classroom', 'lessons' ) );
     }
 
     /**
