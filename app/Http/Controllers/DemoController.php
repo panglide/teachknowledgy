@@ -18,10 +18,11 @@ class DemoController extends Controller
     public function index(Standard $standard, User $user, Lesson $lesson)
     {
       $teacher = User::find(1);
-      $gradeLevel = 4;
+      $gradeLevel = 5;
       $subject = $teacher->subject;
       
-      //Go get Subject and Grade Specific PDF from TN Gov
+      
+    //Go get Subject and Grade Specific PDF from TN Gov
       $url = 'https://www.tn.gov/content/dam/tn/education/standards/math/Standards_Support_grade_'. $gradeLevel .'_Mathematics.pdf';
 
       $filename = basename($url);
@@ -34,8 +35,6 @@ class DemoController extends Controller
       $data = Pdf::getText('../public/'.$filename, '/usr/local/bin/pdftotext');
     
       $standards_arrays = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
-    
-      // dd($standards_arrays);
 
       $str = $standards_arrays[0];
       $needle = substr($str, 0, 1 );
@@ -46,6 +45,7 @@ class DemoController extends Controller
 
       $test = preg_replace('/\n/', '', $standards_arrays);
 
+    
     // Get the Standard names
       foreach( $test as $key => $val ) {      
         if( preg_match('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $val ) ) {
@@ -61,64 +61,32 @@ class DemoController extends Controller
   
    
     // Get the Standard objectives 
-      
-      
-      // foreach( $test as $k => $v) {
+    foreach( $standards_arrays as $data ) {
+      if( preg_match( '/\bMajor Work of the Grade\b/', $data ) || preg_match( '/\bSupporting Content\b/', $data ))  {
+
+        $string = preg_replace('/\n/', '', $data);
+        $needle = ")";
+        $start = strpos( $string, $needle);
+        $end = strpos( $string, "Evidence" );  
+        $length = $end - $start;
         
-      //   if( preg_match( '/Major Work of the Grade || Supporting Content/', $v)  ) {
-      //     $needles[] = $v;
-      //   } 
-      //   foreach( $needles as $needle ) {
-      //   
-      //   }
-      // }
-
-      foreach( $test as $data ) {
-        if( preg_match( '/\bMajor Work of the Grade\b/', $data ) || preg_match( '/\bSupporting Content\b/', $data ))  {
-          $objectives[] = $data;
-        }
+        $objectives[] = substr( $string, $start + 1, $length - 1); 
       }
-
+    }
     
-      // dd($names);
-      // dd($objectives);
-    // Create associative array of Standards
-    
+    //Create associative array of Standards
     for($i = 0; $i < count($names); $i++) {
-      $arr[$names[$i]] = [ $names[$i], $objectives[$i] ];
-      // $standards_table[] = array_combine( $arr, $objectives );
-      // echo '<pre>';
-      // print_r($arr);
-      // echo '</pre>';
-      // $standards_table[$names[$i]] = $objectives[$i];
+      $arr[] = [ $names[$i], $objectives[$i] ];
+    }
+      
+    
+    $lesson = Lesson::find(1);
+      
+    foreach( $arr as $standards ) {
+      $standard = $standards;
     }
 
-    
-    // $standards_table = array_merge( [], $names, $objectives );
-    
-
-    // for( $i = 0; $i < count( $names ); $i++ ) {
-    //   $arr[] = $names[$i] [ $objectives[$i] ];
-    //   $standards_table[] = array_combine( $arr, $objectives );
-    // }
-      // for( $i = 0; $i < count( $names ); $i++ ) {
-      //   $arr[] = [ $names[$i], [$objectives] ];
-      //   $standards_table[] = array_combine( $arr, $objectives);
-      // }
-    
-  
-    
-
-      $lesson = Lesson::find(1);
-      
-      foreach( $arr as $standards ) {
-        $standard = $standards;
-
-      }
-
-      
-
-      return view('lessons.show', compact('standard', 'class', 'teacher', 'lesson'));
+    return view('lessons.show', compact('standard', 'class', 'teacher', 'lesson'));
 
   }
 
