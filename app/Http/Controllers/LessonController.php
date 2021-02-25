@@ -48,11 +48,11 @@ class LessonController extends Controller
      */
     public function show(User $user, Lesson $lesson, Standard $standard)
     {
-    $teacher = User::find(1);
-      
-      $lesson = Lesson::find(1);
-      $standard = Standard::find(1);
-    //   dd($lesson);
+       
+       $teacher = auth()->user();
+        $standard = Standard::find(1);
+
+    
         return view('lessons.show2', compact('lesson', 'teacher', 'standard'));
     }
 

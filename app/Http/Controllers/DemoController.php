@@ -17,59 +17,7 @@ class DemoController extends Controller
      */
     public function index(Standard $standard)
     {
-      $myGrade = 1;
-
-      //Read PDF and extract text
-      $data = (new Pdf())->setPdf('output.pdf')->text();
-      $stand = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
-      $kStand = preg_split('/([K]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_DELIM_CAPTURE );
-      $kStandards = array_slice($kStand, 3);
-      $standards = array_slice($stand, 3);
-
-
-      foreach ($standards as $key => $standard ) {
-        if($key % 2 === 0) {
-            $Keys[] = $standard[0];
-        } else {
-            $Values[] = $standard[0];
-        }
-       }
-
-      foreach ($kStandards as $key => $standard ) {
-        if($key % 2 === 0) {
-            $KKeys[] = $standard[0];
-        } else {
-            $KValues[] = $standard[0];
-        }
-       }
-
-       foreach(array_combine($KKeys, $KValues) as $key=>$value){
-         $KArray[$key] = $value;
-       }
-
-
-         //combine Keys and Values arrays into one associative array
-      foreach(array_combine($Keys, $Values) as $key=>$value){
-        $completeArray[$key] = $value;
-      }
-
-
-      if($myGrade == 0){
-        $results = array_filter($KArray, function($key) use($myGrade){
-          return $key == $myGrade;
-        }, ARRAY_FILTER_USE_KEY);
-      }
-      else {
-
-      $results = array_filter($completeArray, function($key) use($myGrade){
-        return $key == $myGrade;
-      }, ARRAY_FILTER_USE_KEY);
-    }
-
-    $lesson = Lesson::find(1);
-
-        // send filtered array to view
-        return view('demo.index', compact('results', 'lesson'));
+      
 
   }
 
@@ -82,7 +30,7 @@ class DemoController extends Controller
      */
     public function create()
     {
-        //
+        return view('register');
     }
 
     /**
@@ -102,9 +50,22 @@ class DemoController extends Controller
      * @param  \App\r  $r
      * @return \Illuminate\Http\Response
      */
-    public function show(r $r)
+    public function show(Standard $standard, Request $request, User $user)
     {
-        //
+      
+      $classroom->subject = request($subject);
+      $classroom->gradeLevel = request($gradeLevel);
+      
+      $lessons = Lesson::where('subject', '=', $classroom->subject)
+      ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
+     
+      $standards = Standard::where('subject', '=', $classroom->subject)
+      ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
+
+      $teacher = $user->id;
+      
+
+      return view('classrooms.show', compact('classroom', 'lessons', 'teacher', 'standards' ) );;
     }
 
     /**

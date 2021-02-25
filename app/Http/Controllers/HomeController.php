@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index(Classroom $classroom, User $user)
     {
-        $id = 4;
+        $id = 3;
         $user = User::find($id);
         $classrooms = Classroom::all();
         
