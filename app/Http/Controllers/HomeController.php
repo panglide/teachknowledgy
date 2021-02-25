@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Classroom;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -21,8 +23,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Classroom $classroom, User $user)
     {
-        return view('home');
+        $id = 3;
+        $user = User::find($id);
+        $classrooms = Classroom::all();
+        
+        return view('home', compact( 'classrooms', 'user' ) );
     }
 }

@@ -11,44 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/resources', function (){
-  return view('resources.demo');
-});
+Route::view('/', 'welcome');
 
-Route::get('/remediation_lesson', function(){
-  return view('lessons/remediation_lessons/demo');
-});
+Route::view('/demo', 'DemoController@index');
 
-Route::get('/extension_lesson', function(){
-  return view('lessons/extension_lessons/demo');
-});
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-Route::get('/centers', function(){
-  return view('centers/demo');
-});
+Route::get('/classrooms', 'ClassroomController@index');
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/classrooms/{classroom}', 'ClassroomController@show');
 
 Route::get('/standards', 'StandardController@index');
 
-Route::get('/demo', 'DemoController@index');
-
-Route::get('/lessons/demo', 'LessonController@show');
-
-Route::get('/assessments/1', 'AssessmentController@show');
-
-Route::get('/guided_exercise', function(){
-  return view('exercises/guided_exercises/demo');
-});
-
-Route::get('/independent_exercise', function(){
-  return view('/exercises/independent_exercises/demo');
-});
+Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');

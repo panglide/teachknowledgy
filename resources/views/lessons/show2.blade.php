@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
 <h1>Demo Lesson Page</h1>
 
 <table class="table">
@@ -136,8 +135,4 @@
         <td><a href="{{url('/centers')}}">Station 1</a>, <a href="#">Station 2</a>, <a href="#">Station 3</a>, <a href="#">Station 4</a>, <a href="#">Station 5</a></td>
       </tr>
 </table>
-
-
-
-
 @endsection
