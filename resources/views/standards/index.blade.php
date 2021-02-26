@@ -1,16 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
+<div>Thank you for trying Teachknowledgy!</div>
+<div>We are gathering your materials now.</div>
 
-@foreach($results as $title => $content )
-
-<div class="container">
-  <h3>{{ $title }}</h3> <p>{{ $content }} </p>
-</div>
-
-
-
-@endforeach
+<button class="btn btn-outline-secondary">View Dashboard</button>
 
 
 @endsection

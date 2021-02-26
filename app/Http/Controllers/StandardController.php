@@ -98,7 +98,7 @@ class StandardController extends Controller
         
             $stand->save();
     }
-
+    return view('standards');
   }
-
+  
 }
