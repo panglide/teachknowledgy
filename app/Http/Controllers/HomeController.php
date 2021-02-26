@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index(Classroom $classroom, User $user)
     {
-        $id = 3;
+        
         $user = User::find($id);
         $classrooms = Classroom::all();
         
-        return view('home', compact( 'classrooms', 'user' ) );
+        return view('dashboard', compact( 'classrooms', 'user' ) );
     }
 }
