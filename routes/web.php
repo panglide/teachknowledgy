@@ -25,7 +25,7 @@ Route::get('/classrooms', 'ClassroomController@index');
 
 Route::get('/classrooms/{classroom}', 'ClassroomController@show');
 
-Route::get('/standards', 'StandardController@index')->name('standards.show');
+Route::get('/standards', 'StandardController@index');
 
 Route::get('/demo', 'DemoController@index');
 

@@ -29,7 +29,7 @@ class StandardController extends Controller
     
     $filename = basename($url); 
 
-    if(! '../public/'.$filename ) {
+    if( ! '../public/'.$filename ) {
 
         $result = file_put_contents($filename, file_get_contents($url));
 
