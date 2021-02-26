@@ -36,9 +36,10 @@ class StandardController extends Controller
     } 
       
    
+    $pdf_extrator_path = base_path.'/vendor/pdftotext';
 
     //Read PDF and extract text
-    $data = Pdf::getText('../public/'.$filename, '/vendor/spatie/pdftotext');
+    $data = Pdf::getText('../public/'.$filename,  $pdf_extrator_path);
     
     // Parse out PDF  
     $standards_arrays = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
