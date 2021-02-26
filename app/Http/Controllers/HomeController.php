@@ -25,10 +25,14 @@ class HomeController extends Controller
      */
     public function index(Classroom $classroom, User $user)
     {
-        
+        $classrooms = Classroom::where('user_id', '=', auth()->id() )->get();
        
-        $classrooms = Classroom::where('user_id', '=', auth()->id())->get();
-        
+        // dd($classrooms);
+
+        if( count( $classrooms ) < 1 ) {
+            return view('classrooms.create', compact( 'user') );
+        }
+
         return view('home', compact( 'classrooms') );
     }
 }

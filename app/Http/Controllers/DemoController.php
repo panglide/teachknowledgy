@@ -18,11 +18,9 @@ class DemoController extends Controller
     public function index(Standard $standard, User $user, Lesson $lesson)
     {
       
-<<<<<<< HEAD
 
+        
     return view('lessons.show', compact('standard', 'class', 'teacher', 'lesson'));
-=======
->>>>>>> staging
 
   }
 
