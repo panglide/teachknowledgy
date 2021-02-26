@@ -29,6 +29,6 @@ class HomeController extends Controller
         $user = User::find($id);
         $classrooms = Classroom::all();
         
-        return view('dashboard', compact( 'classrooms', 'user' ) );
+        return view('home', compact( 'classrooms', 'user' ) );
     }
 }
