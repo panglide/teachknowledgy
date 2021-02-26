@@ -39,7 +39,9 @@ class StandardController extends Controller
     $local_path = '/usr/local/bin/pdftotext';
     $remote_path = '/vendor/spatie/pdf-to-text';
     //Read PDF and extract text
-    $data = Pdf::getText('../public/'.$filename, $remote_path);
+    // $data = Pdf::getText('../public/'.$filename, $remote_path);
+
+    $data = (new PDF())->setPdf('../public/'.$filename)->text();
     
     // Parse out PDF  
     $standards_arrays = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
