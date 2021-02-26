@@ -14,6 +14,7 @@
 
 Auth::routes();
 
+
 Route::view('/', 'welcome');
 
 Route::view('/demo', 'DemoController@index');
