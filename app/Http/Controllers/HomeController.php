@@ -27,8 +27,8 @@ class HomeController extends Controller
     {
         
        
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::where('user_id', '=', $user->id);->get();
         
-        return view('home', compact( 'classrooms', 'user' ) );
+        return view('home', compact( 'classrooms') );
     }
 }
