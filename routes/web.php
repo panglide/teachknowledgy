@@ -11,6 +11,7 @@
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', 'PagesController@welcome');
 
 Auth::routes();
@@ -30,13 +31,25 @@ Auth::routes();
 // Route::get('/centers', function(){
 //   return view('centers/demo');
 // });
+=======
+
+Auth::routes();
 
 
+Route::view('/', 'welcome');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::view('/demo', 'DemoController@index');
+
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+>>>>>>> staging
+
+Route::get('/classrooms', 'ClassroomController@index');
+
+Route::get('/classrooms/{classroom}', 'ClassroomController@show');
 
 Route::get('/standards', 'StandardController@index');
 
+<<<<<<< HEAD
 Route::get('/demo', 'DemoController@index');
 
 Route::get('/assessments/1', 'AssessmentController@show');
@@ -48,3 +61,6 @@ Route::get('/assessments/1', 'AssessmentController@show');
 // Route::get('/independent_exercise', function(){
 //   return view('/exercises/independent_exercises/demo');
 // });
+=======
+Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
+>>>>>>> staging

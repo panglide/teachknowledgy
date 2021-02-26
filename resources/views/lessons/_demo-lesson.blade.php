@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <td>Lesson Title</td>
-        <td>{{ $lesson->name }}</td>
+        <td>This Is The Title</td>
       </tr>
       <tr>
         <td>Lesson Overview</td>
@@ -34,7 +34,7 @@
       </tr>
       <tr>
         <td>Standards:</td>
-        <td>{{$standard}}</td>
+        <td>This is the standard</td>
       </tr>
       <tr>
         <td>Lesson Objective</td>

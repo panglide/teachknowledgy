@@ -18,8 +18,11 @@ class DemoController extends Controller
     public function index(Standard $standard, User $user, Lesson $lesson)
     {
       
+<<<<<<< HEAD
 
     return view('lessons.show', compact('standard', 'class', 'teacher', 'lesson'));
+=======
+>>>>>>> staging
 
   }
 
@@ -32,7 +35,7 @@ class DemoController extends Controller
      */
     public function create()
     {
-        //
+        return view('register');
     }
 
     /**
@@ -52,9 +55,22 @@ class DemoController extends Controller
      * @param  \App\r  $r
      * @return \Illuminate\Http\Response
      */
-    public function show(r $r)
+    public function show(Standard $standard, Request $request, User $user)
     {
-        //
+      
+      $classroom->subject = request($subject);
+      $classroom->gradeLevel = request($gradeLevel);
+      
+      $lessons = Lesson::where('subject', '=', $classroom->subject)
+      ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
+     
+      $standards = Standard::where('subject', '=', $classroom->subject)
+      ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
+
+      $teacher = $user->id;
+      
+
+      return view('classrooms.show', compact('classroom', 'lessons', 'teacher', 'standards' ) );;
     }
 
     /**
