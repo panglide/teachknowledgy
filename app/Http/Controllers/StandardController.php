@@ -35,7 +35,7 @@ class StandardController extends Controller
 
     } 
       
-    
+    dd($result);
 
     //Read PDF and extract text
     $data = Pdf::getText('../public/'.$filename, '/usr/local/bin/pdftotext');
