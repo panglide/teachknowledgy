@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Standard extends Model
 {
-<<<<<<< HEAD
-    protected $fillable = [ 'name', 'objective', 'subject' ];
-=======
     protected $fillable = ['name', 'description', 'subject', 'gradeLevel'];
->>>>>>> staging
+
+    public function lesson() {
+        return $this->belongsTo(Lesson::class);
+    }
 }

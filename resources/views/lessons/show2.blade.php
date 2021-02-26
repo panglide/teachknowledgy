@@ -34,17 +34,15 @@
       </tr>
       <tr>
         <td>Standards:</td>
-       
-        <td>{{ $standard->name }}</td>
-       
-      </tr>
-      <tr>
         <td>Lesson Objective</td>
-        <td>
-          <p>{{ $standard->description }}
-          </p>
-        </td>
       </tr>
+      
+       @foreach( $standards as $standard )
+       <tr>
+          <td>{{ $standard->name }}</td>
+          <td>{{ $standard->description }}</td>
+        </tr>
+       @endforeach
       <tr>
         <td>Assessment/Evaluation</td>
         <td><a href="{{url('assessments/1')}}">Assessment 1</a>, <a href="#">Assessment 2</a>, <a href="#">Assessment 3</a></td>
