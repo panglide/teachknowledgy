@@ -25,6 +25,10 @@ Route::get('/classrooms', 'ClassroomController@index');
 
 Route::get('/classrooms/{classroom}', 'ClassroomController@show');
 
+Route::get('/classrooms.create', 'ClassroomController@create');
+
+Route::post('/classrooms', 'ClassroomController@store');
+
 Route::get('/standards', 'StandardController@index');
 
 Route::get('/demo', 'DemoController@index');

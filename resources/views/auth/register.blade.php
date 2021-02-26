@@ -62,24 +62,38 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="gradeLevel" class="col-md-4 col-form-label text-md-right">Grade Level</label>
+                          <label for="gradeLevel" class="col-md-4 col-form-label text-md-right mr-3">Grade Level</label>
 
                             <div class="form-check form-check-inline col-md-6">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="0" name="gradeLevel">
-                                <label class="form-check-label" for="kindergarten">K</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="gradeLevel">
-                                <label class="form-check-label" for="first grade">1</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="2" name="gradeLevel">
-                                <label class="form-check-label" for="second grade">2</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="3" name="gradeLevel">
-                                <label class="form-check-label" for="third grade">3</label>&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="4" name="gradeLevel">
-                                <label class="form-check-label" for="fourth grade">4</label>&nbsp;
-                              </div>
+                            @for($i = 1; $i < 9; $i++)
+                                <input class="form-check-input gradeLevel-check" onclick="checkGrade()" type="checkbox" id="gardeLevel {{ $i }}" value="{{ $i }}" name="gradeLevel[]" required>
+                                <label class="form-check-label mr-2" for="gradeLevel">{{ $i }}</label>
+                            @endfor
+                            </div>
+
+                            @error( 'gradeLevel' )
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+
                         <div class="form-group row">
-                            <input class="form-control" type="text" name="subject" placeholder="ELA, Math, Science, SS, All" />
-                            <label class="form-check-label" for="subject"></label>
+                          <label for="subject" class="col-md-4 col-form-label text-md-right mr-3">Subject(s)</label>
+
+                            <div class="form-check form-check-inline col-md-6">
+                            <?php $subjects = ['ELA', 'Math', 'Science', 'Social Studies' ]; ?>
+                            @foreach( $subjects as $subject )
+                                <input class="form-check-input subject-check" onclick="checkSubject()" type="checkbox" id="{{ $subject }}" value="{{ $subject }} " name="subject[]" required>
+                                <label class="form-check-label mr-2" for="subject">{{ $subject }}</label>
+                            @endforeach
+                            </div>
+
+                            @error( 'subject' )
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group row mb-0">

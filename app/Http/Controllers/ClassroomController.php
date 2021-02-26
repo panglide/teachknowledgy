@@ -15,20 +15,21 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Classroom $classroom)
+    public function index(Classroom $classroom, User $user)
     {
-        $classrooms = Classroom::all();
-        return(route('classrooms.index', compact( 'classrooms' ) ) );
+        $classrooms = Classroom::where('user_id', '=', auth()->id() )->get();
+        
+            return(route('classrooms.index', compact( 'classrooms' ) ) );
     }
 
-    /**
+    /**AHAH
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('classrooms.create');
     }
 
     /**
@@ -39,7 +40,28 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+    $request->validate([
+        'title' => 'required',
+        'subject' => 'required'
+    ]);
+
+   
+    $classroom = new Classroom();
+
+    $classroom->title = request('title');
+
+        foreach( $request['subject'] as $subject) {
+        $classroom->subject = $subject;
+        }
+        $classroom->user_id = auth()->id();
+
+        foreach( $request['gradeLevel'] as $gradeLevel) {
+            $classroom->gradeLevel = $gradeLevel;
+            }
+        
+      
+        $classroom->save();
     }
 
     /**
