@@ -57,7 +57,7 @@ class ClassroomController extends Controller
         $standards = Standard::where('subject', '=', $classroom->subject)
         ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
 
-        $teacher = User::find(3);
+        $teacher = auth()->user();
 
         return view('classrooms.show', compact('classroom', 'lessons', 'teacher', 'standards' ) );
     }
