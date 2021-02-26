@@ -17,7 +17,7 @@ class StandardController extends Controller
      */
     public function index(Standard $standard, User $user, Lesson $lesson)
     {
-      
+      //this is a comment to force change for commit 
       $teacher = User::find(1);
       $gradeLevel = 5;
       $subject = $teacher->subject;
