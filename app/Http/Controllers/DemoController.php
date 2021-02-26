@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use App\Demo;
 use App\Standard;
 use Spatie\PdfToText\Pdf;
@@ -15,9 +15,14 @@ class DemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Standard $standard)
+    public function index(Standard $standard, User $user, Lesson $lesson)
     {
       
+<<<<<<< HEAD
+
+    return view('lessons.show', compact('standard', 'class', 'teacher', 'lesson'));
+=======
+>>>>>>> staging
 
   }
 
