@@ -26,9 +26,9 @@ class HomeController extends Controller
     public function index(Classroom $classroom, User $user)
     {
         
-        $user = User::find($id);
+        $teacher = auth()->user();
         $classrooms = Classroom::all();
         
-        return view('home', compact( 'classrooms', 'user' ) );
+        return view('home', compact( 'classrooms', 'teacher' ) );
     }
 }
