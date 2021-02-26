@@ -37,7 +37,7 @@ class StandardController extends Controller
       
    
     $local_path = '/usr/local/bin/pdftotext';
-    $remote_path = '~/staging.teachknowledgy.com/vendor/spatie/pdf-to-text';
+    $remote_path = '~/vendor/spatie/pdf-to-text/src/Pdf.php';
     //Read PDF and extract text
     $data = Pdf::getText('../public/'.$filename);
     
