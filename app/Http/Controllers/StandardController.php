@@ -19,7 +19,9 @@ class StandardController extends Controller
     public function index(Standard $standard, User $user, Lesson $lesson)
     {
       //this is a comment to force change for commit 
+      
       $teacher = auth()->user();
+     
       $gradeLevel = $teacher->gradeLevel;
       $subject = $teacher->subject;
       
@@ -99,7 +101,11 @@ class StandardController extends Controller
         
             $stand->save();
     }
-    return view('standards.index');
+    return redirect('dashboard');
+  }
+
+  public function show() {
+
   }
   
 }
