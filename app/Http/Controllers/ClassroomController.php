@@ -62,6 +62,8 @@ class ClassroomController extends Controller
         
       
         $classroom->save();
+
+        return redirect('/dashboard');
     }
 
     /**
