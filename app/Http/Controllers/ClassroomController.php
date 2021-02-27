@@ -19,7 +19,7 @@ class ClassroomController extends Controller
     {
         $classrooms = Classroom::where('user_id', '=', auth()->id() )->get();
         
-            return(route('classrooms.index', compact( 'classrooms' ) ) );
+            return view('classrooms', compact( 'classrooms' ) );
     }
 
     /**AHAH
