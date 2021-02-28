@@ -129,14 +129,16 @@
         <div class="content">
           <div class="title">Teachknowledgy</div>
           <div class="links">
-            <a href="{{url('login')}}">Login</a>
-            <a href="{{url('register')}}">Register</a>
+            
             @if(Auth::check())
             <a href="{{ url('dashboard') }}">Dashboard</a>
-            @else 
-            <a href="{{url('register')}}">Demo</a>
+            @else
+            <a href="{{url('login')}}">Login</a>
+            <a href="{{url('register')}}">Register</a>
             @endif
+            <a href="#about">About</a>
           </div>
+
 
         </div>
 
@@ -144,7 +146,7 @@
 
 
       <div style="padding: 25px; height:auto;background-color:#CCCECD;font-size:16px">
-        <h1 style="text-align: center;">About Teachknowledgy</h1>
+        <h1 id="about" style="text-align: center;">About Teachknowledgy</h1>
         <h4>What is it?</h4>
         <p>Teachknowledgy is an administrative assitant for classroom teachers.  It is meant to serve as a simple and powerful data management tool for the classroom
            teacher who devotes countless hours to the chore of collecting and reporting data instead of interacting with students or preparing for tomorrow's lesson.
@@ -161,8 +163,8 @@
           This web based application acts as a layer of software that sits between the teacher and the students, the teacher and the administrators, the teacher
           and the grade book.  It attempts to autonmously collect meaningful data, generate meaningful reports, and track classroom progress toward
           proficiency related to state and district learning standards in real time.  The data input is programmatically performed by the system and the
-          classroom teacher is free to give 100% of their attention to the students. <div class="links"><a href="{{url('lessons/demo')}}">Click for a demo!</a></div>
-        </p>
+          classroom teacher is free to give 100% of their attention to the students.</p>
+          <a href="{{url('dashboard')}}"><button class="btn btn-outline-secondary">Demo</button></a>
         <br/>
         <h4>What Teachknowledgy doesn't do.</h4>
         <p>Teachknowledgy will not replace the myriad of data reporting systems every classroom teacher is burdened with.  You will still need to maintain
@@ -184,8 +186,8 @@
       <div class="parallax full-height flex-bottom">
         <div class="content">
           <div class="tagline">Focus on what is important!</div>
-          <div style=" margin-top: 5px;" class="links">
-            <a style="background: #fff1e6; border-radius: 10%; padding: 8px;" href="{{url('register')}}">Register Now</a>
+          <div>
+            <a href="{{url('register')}}"><button class="btn btn-outline-secondary btn-lg">Register</button></a>
           </div>
 
         </div>

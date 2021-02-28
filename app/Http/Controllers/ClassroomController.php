@@ -40,34 +40,39 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
+        
+       request()->validate([
+            'title' => 'required',
+            'subject' => 'required',
+            'gradeLevel' => 'required'
+        ]);
+        
+        
+
+        $subjects = request('subject');    
+
+        $classroom = new Classroom();
+
+        $classroom->title = request('title');
     
-    $request->validate([
-        'title' => 'required',
-        'subject' => 'required'
-    ]);
-
-   
-    $classroom = new Classroom();
-
-    $classroom->title = request('title');
-
-        foreach( $request['subject'] as $subject) {
-        $classroom->subject = $subject;
-        }
         $classroom->user_id = auth()->id();
 
-        foreach( $request['gradeLevel'] as $gradeLevel) {
-            $classroom->gradeLevel = $gradeLevel;
+        $classroom->gradeLevel = request('gradeLevel');
+
+        foreach( $subjects as $subject) {
+            $classroom->subject = $subject;
+            
             }
         
-      
+        
         $classroom->save();
+
 
         if( ! $classroom->id ) {
             return redirect('classrooms.create');
         }
-        
-        return redirect( '/standards/?classroom='. $classroom->id );
+            
+            return redirect( '/standards/?classroom='. $classroom->id );
 
     }
 
@@ -83,9 +88,9 @@ class ClassroomController extends Controller
         $lessons = Lesson::where('subject', '=', $classroom->subject)
         ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
 
-        $user = auth()->user();
+        $week = 0;
 
-        return view('classrooms.show', compact( 'classroom', 'lessons', 'user' ) );
+        return view('classrooms.show', compact( 'classroom', 'lessons', 'week') );
     }
 
     /**

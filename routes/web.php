@@ -27,6 +27,7 @@ Route::get('/classrooms.create', 'ClassroomController@create');
 
 Route::post('/classrooms', 'ClassroomController@store');
 
+Route::get('/classrooms/{classroom}/delete', 'ClassroomController@destroy')->name('classrooms.delete');
 
 Route::post('/lessons', 'LessonController@store');
 
