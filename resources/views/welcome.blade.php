@@ -164,7 +164,7 @@
           and the grade book.  It attempts to autonmously collect meaningful data, generate meaningful reports, and track classroom progress toward
           proficiency related to state and district learning standards in real time.  The data input is programmatically performed by the system and the
           classroom teacher is free to give 100% of their attention to the students.</p>
-          <a href="{{url('dashboard')}}"><button class="btn btn-outline-secondary">Demo</button></a>
+          <a href="{{url('register')}}"><button class="btn btn-outline-secondary">Demo</button></a>
         <br/>
         <h4>What Teachknowledgy doesn't do.</h4>
         <p>Teachknowledgy will not replace the myriad of data reporting systems every classroom teacher is burdened with.  You will still need to maintain
