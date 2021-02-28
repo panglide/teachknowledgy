@@ -29,9 +29,10 @@ class CreateLessonsTable extends Migration
 
            $table->unique(['lesson_id', 'standard_id']);
 
-            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+           $table->foreign('standard_id')->references('id')->on('standards')->onDelete('cascade');
 
-            $table->foreign('standard_id')->references('id')->on('standards')->onDelete('cascade');
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            
         });
     }
 

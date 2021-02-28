@@ -22,6 +22,6 @@ $factory->define(Lesson::class, function (Faker $faker) {
     return [
         'name' => $faker->lexify('Lesson Name : ??????  ??????  ??????????'),
         'subject' => 'Math',
-        'gradeLevel' => $faker->numberBetween(0, 9)
+        'gradeLevel' => $faker->numberBetween(1, 8)
     ];
 });
