@@ -63,7 +63,12 @@ class ClassroomController extends Controller
       
         $classroom->save();
 
-        return redirect('/dashboard');
+        if( ! $classroom->id ) {
+            return redirect('classrooms.create');
+        }
+        
+        return redirect( '/standards/?classroom='. $classroom->id );
+
     }
 
     /**
@@ -72,18 +77,15 @@ class ClassroomController extends Controller
      * @param  \App\Classroom  $classroom
      * @return \Illuminate\Http\Response
      */
-    public function show(Classroom $classroom, Lesson $lesson, User $user, Request $request, Standard $standard)
+    public function show(Classroom $classroom, Lesson $lesson, User $user)
     {
         
         $lessons = Lesson::where('subject', '=', $classroom->subject)
         ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
-       
-        $standards = Standard::where('subject', '=', $classroom->subject)
-        ->where('gradeLevel', '=', $classroom->gradeLevel)->get();
 
-        $teacher = auth()->user();
+        $user = auth()->user();
 
-        return view('classrooms.show', compact('classroom', 'lessons', 'teacher', 'standards' ) );
+        return view('classrooms.show', compact( 'classroom', 'lessons', 'user' ) );
     }
 
     /**

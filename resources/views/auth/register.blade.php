@@ -61,41 +61,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                          <label for="gradeLevel" class="col-md-4 col-form-label text-md-right mr-3">Grade Level</label>
-
-                            <div class="form-check form-check-inline col-md-6">
-                            @for($i = 1; $i < 9; $i++)
-                                <input class="form-check-input gradeLevel-check" onclick="checkGrade()" type="checkbox" id="gardeLevel {{ $i }}" value="{{ $i }}" name="gradeLevel[]" required>
-                                <label class="form-check-label mr-2" for="gradeLevel">{{ $i }}</label>
-                            @endfor
-                            </div>
-
-                            @error( 'gradeLevel' )
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group row">
-                          <label for="subject" class="col-md-4 col-form-label text-md-right mr-3">Subject(s)</label>
-
-                            <div class="form-check form-check-inline col-md-6">
-                            <?php $subjects = ['ELA', 'Math', 'Science', 'Social Studies' ]; ?>
-                            @foreach( $subjects as $subject )
-                                <input class="form-check-input subject-check" onclick="checkSubject()" type="checkbox" id="{{ $subject }}" value="{{ $subject }} " name="subject[]" required>
-                                <label class="form-check-label mr-2" for="subject">{{ $subject }}</label>
-                            @endforeach
-                            </div>
-
-                            @error( 'subject' )
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -36,7 +36,7 @@ Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
 
 
 
-Route::get('/standards', 'StandardController@index');
+Route::get('/standards', 'StandardController@create');
 
 Route::get('/standads/{standard}', 'StandardController@show')->name('standards.show');
 

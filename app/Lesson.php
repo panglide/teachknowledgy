@@ -13,6 +13,6 @@ class Lesson extends Model
     }
 
     public function standards() {
-        return $this->hasMany(Standard::class);
+        return $this->belongsToMany(Standard::class);
     }
 }

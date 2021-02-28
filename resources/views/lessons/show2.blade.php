@@ -10,7 +10,7 @@
       </tr>
       <tr>
         <td>Class:</td>
-        <td>{{ $teacher->gradeLevel }} {{ $teacher->subject }}</td>
+        <td>{{ $classroom->title }}</td>
       </tr>
       <tr>
         <td>Course Unit:</td>
@@ -33,11 +33,11 @@
           </td>
       </tr>
       <tr>
-        <td>Standards:</td>
-        <td>Lesson Objective</td>
+        <td>Standards</td>
+        <td>Objectives</td>
       </tr>
       
-       @foreach( $standards as $standard )
+       @foreach( $lesson->standards as $standard )
        <tr>
           <td>{{ $standard->name }}</td>
           <td>{{ $standard->description }}</td>

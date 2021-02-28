@@ -8,22 +8,33 @@ use Illuminate\Http\Request;
 use Spatie\PdfToText\Pdf;
 use Illuminate\Support\Arr;
 use App\User;
+use App\Classroom;
 
 class StandardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Standard $standard, User $user, Lesson $lesson)
+  
+    // protected $classroom;
+
+    // public function __construct($classroom) {
+    //   $this->classroom = $classroom;
+    // }
+    
+    public function create(Request $request, Standard $standard, User $user, Lesson $lesson)
     {
-      //this is a comment to force change for commit 
       
-      $teacher = auth()->user();
      
-      $gradeLevel = $teacher->gradeLevel;
-      $subject = $teacher->subject;
+      $classroom = Classroom::findOrFail(request('classroom'));
+
+      
+      $gradeLevel = $classroom->gradeLevel;
+      $subject = $classroom->subject;
+
+      $standards = Standard::where( 'gradeLevel', '=', $gradeLevel )
+      ->where( 'subject', '=', $subject )->get();
+
+      if( count( $standards ) > 0 ) {
+        return redirect('dashboard');
+      }
       
       
     //Go get Subject and Grade Specific PDF from TN Gov
@@ -41,7 +52,7 @@ class StandardController extends Controller
     $local_path = '/usr/local/bin/pdftotext';
     $remote_path = '/usr/bin/pdftotext';
     //Read PDF and extract text
-    $data = Pdf::getText('../public/'.$filename);
+    $data = Pdf::getText('../public/'.$filename, $local_path);
     
     // Parse out PDF  
     $standards_arrays = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
@@ -89,23 +100,18 @@ class StandardController extends Controller
       $standards[] = [ $names[$i], $objectives[$i] ];
     }
       
-
+   
     foreach( $standards as $standard ) {
         
-        $stand = new Standard();
+      $stand = new Standard();
 
-            $stand->name = $standard[0];
-            $stand->subject = $teacher->subject;
-            $stand->gradeLevel = $teacher->gradeLevel;
-            $stand->description = $standard[1];
-        
-            $stand->save();
+          $stand->name = $standard[0];
+          $stand->subject = $subject;
+          $stand->gradeLevel = $gradeLevel;
+          $stand->description = $standard[1];
+      
+          $stand->save();
     }
     return redirect('dashboard');
   }
-
-  public function show() {
-
-  }
-  
 }

@@ -40,8 +40,13 @@
     <div class="form-check form-check-inline col-md-6">
     <?php $subjects = ['ELA', 'Math', 'Science', 'Social Studies' ]; ?>
     @foreach( $subjects as $subject )
+        @if($subject !== 'Math')
+        <input class="form-check-input subject-check" onclick="checkSubject()" type="checkbox" id="{{ $subject }}" value="{{ $subject }} " name="subject[]" disabled="disabled">
+        <label class="form-check-label mr-2" for="subject">{{ $subject }}</label>
+        @else
         <input class="form-check-input subject-check" onclick="checkSubject()" type="checkbox" id="{{ $subject }}" value="{{ $subject }} " name="subject[]" required>
         <label class="form-check-label mr-2" for="subject">{{ $subject }}</label>
+        @endif
     @endforeach
     </div>
 
@@ -52,7 +57,7 @@
     @enderror
 </div>
 
-<button type="submit" class="btn btn-outline-sedondary">Submit</button>
+<button type="submit" class="btn btn-outline-secondary">Submit</button>
 
 </form>
 
