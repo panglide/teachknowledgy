@@ -21,13 +21,20 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('/classrooms', 'ClassroomController@index');
 
-Route::get('/classrooms/{classroom}', 'ClassroomController@show');
+
 
 Route::get('/classrooms.create', 'ClassroomController@create');
 
 Route::post('/classrooms', 'ClassroomController@store');
 
-Route::get('/classrooms/{classroom}/delete', 'ClassroomController@destroy')->name('classrooms.delete');
+Route::get('/classrooms/{classroom}', 'ClassroomController@show');
+
+Route::delete('/classrooms/{classroom}', 'ClassroomController@destroy');
+
+
+
+
+
 
 Route::post('/lessons', 'LessonController@store');
 

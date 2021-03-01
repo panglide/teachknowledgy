@@ -82,7 +82,7 @@ class ClassroomController extends Controller
      * @param  \App\Classroom  $classroom
      * @return \Illuminate\Http\Response
      */
-    public function show(Classroom $classroom, Lesson $lesson, User $user)
+    public function show(Classroom $classroom, Lesson $lesson)
     {
         
         $lessons = Lesson::where('subject', '=', $classroom->subject)
@@ -124,6 +124,11 @@ class ClassroomController extends Controller
      */
     public function destroy(Classroom $classroom)
     {
-        //
+        
+        $classroom->delete();
+        
+        return redirect('dashboard');
+
+        
     }
 }
