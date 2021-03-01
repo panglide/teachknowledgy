@@ -47,22 +47,23 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, User $user, Lesson $lesson, Standard $standard, Classroom $classroom)
+    public function show(Request $request, Lesson $lesson, Standard $standard)
     {
-       $classroom = $request['classroom'];
+        $classroom = $request['classroom'];
         
-       $teacher = auth()->user();
-
-        $getLesson = Lesson::findOrFail($classroom);
-
         $classroom = Classroom::findOrFail($classroom);
 
         $gradeLevel = $classroom->gradeLevel;
 
-        $subject = $teacher->subject;
+        $subject = $classroom->subject;
+        
+        $teacher = $classroom->user;
        
-        $standards = $lesson->standard;
+        // $standards = $lesson->standard;
 
+        $standards = Standard::where( 'gradeLevel', '=', $gradeLevel )
+        ->where( 'subject', '=', $subject )->limit(3)->get();
+       
     
         return view('lessons.show2', compact('lesson', 'teacher', 'standards', 'classroom'));
     }

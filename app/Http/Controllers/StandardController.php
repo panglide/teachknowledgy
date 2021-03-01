@@ -13,11 +13,6 @@ use App\Classroom;
 class StandardController extends Controller
 {
   
-    // protected $classroom;
-
-    // public function __construct($classroom) {
-    //   $this->classroom = $classroom;
-    // }
     
     public function create(Request $request, Standard $standard, User $user, Lesson $lesson)
     {
@@ -67,7 +62,7 @@ class StandardController extends Controller
       $test = preg_replace('/\n/', '', $standards_arrays);
 
    
-    // Get the Standard names
+    // Get the Standard Names
       foreach( $test as $key => $val ) {      
         if( preg_match('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $val ) ) {
           if( substr( $val, 0, 1 ) == $gradeLevel ) {
@@ -81,7 +76,7 @@ class StandardController extends Controller
       $names = array_values($names);
   
   
-    // Get the Standard objectives 
+    // Get the Standard Objectives 
     foreach( $standards_arrays as $data ) {
       if( preg_match( '/\bMajor Work of the Grade\b/', $data ) || preg_match( '/\bSupporting Content\b/', $data ))  {
 
@@ -131,6 +126,7 @@ class StandardController extends Controller
   }
 }
 
+// Save the Recently Downloaded and Created Standards to DB Table
 
   foreach( $standards as $standard ) {
       $standard = new Standard();

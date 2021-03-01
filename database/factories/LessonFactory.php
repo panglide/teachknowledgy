@@ -20,7 +20,7 @@ use Faker\Generator as Faker;
 $factory->define(Lesson::class, function (Faker $faker) {
 
     return [
-        'name' => $faker->lexify('Lesson Name : ??????  ??????  ??????????'),
+        'name' => $faker->lexify('Lesson Name'),
         'subject' => 'Math',
         'gradeLevel' => $faker->numberBetween(1, 8)
     ];
