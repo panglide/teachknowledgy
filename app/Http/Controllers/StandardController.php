@@ -52,11 +52,11 @@ class StandardController extends Controller
     $local_path = '/usr/local/bin/pdftotext';
     $remote_path = '/usr/bin/pdftotext';
     //Read PDF and extract text
-    $data = Pdf::getText('../public/'.$filename);
+    $data = Pdf::getText('../public/'.$filename, $local_path);
     
     // Parse out PDF  
     $standards_arrays = preg_split('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
-
+    
       $str = $standards_arrays[0];
       $needle = substr($str, 0, 1 );
       $start = strpos( $str, $needle );
@@ -66,7 +66,7 @@ class StandardController extends Controller
 
       $test = preg_replace('/\n/', '', $standards_arrays);
 
-    
+   
     // Get the Standard names
       foreach( $test as $key => $val ) {      
         if( preg_match('/([1-8]\.[A-Z]{1,3}\.[A-Z]{1}\.\d)/', $val ) ) {
@@ -80,7 +80,7 @@ class StandardController extends Controller
       $names = array_unique($names, SORT_STRING);
       $names = array_values($names);
   
-   
+  
     // Get the Standard objectives 
     foreach( $standards_arrays as $data ) {
       if( preg_match( '/\bMajor Work of the Grade\b/', $data ) || preg_match( '/\bSupporting Content\b/', $data ))  {
@@ -94,24 +94,56 @@ class StandardController extends Controller
         $objectives[] = substr( $string, $start + 1, $length - 1); 
       }
     }
-    
-    //Create associative array of Standards
-    for($i = 0; $i < count($names); $i++) {
-      $standards[] = [ $names[$i], $objectives[$i] ];
-    }
-      
    
-    foreach( $standards as $standard ) {
-        
-      $stand = new Standard();
+  // There is a bug in the PDF scraper on 2nd and 6th grades.  This is a hack to get to demo.  Logic is correct but REGEX match is being blown up for some reason. Returns offset in array.
+  if( ($gradeLevel === 2) || ($gradeLevel === 6) ) {
 
-          $stand->name = $standard[0];
-          $stand->subject = $subject;
-          $stand->gradeLevel = $gradeLevel;
-          $stand->description = $standard[1];
-      
-          $stand->save();
+    if( count($names) != count($objectives) ) {
+
+      $n_ct = count($names);
+      $o_ct = count($objectives);
+
+      if(  $n_ct > $o_ct ) {
+        
+        $diff = $n_ct - $o_ct;
+        $x = $n_ct - $diff;
+
+        } else {
+
+        $diff= $o_ct - $n_ct;
+        $x = $o_ct - $diff;
+      }
     }
+   
+    for($i = 0; $i < $x; $i++) {
+
+      if( !empty($names && $objectives) ) {
+        $standards[] = [ $names[$i], $objectives[$i] ];
+      }
+    }
+  } else {
+
+  for($i = 0; $i < count($names); $i++) {
+
+      if( !empty($names && $objectives) ) {
+      $standards[] = [ $names[$i], $objectives[$i] ];
+      }
+  }
+}
+
+
+  foreach( $standards as $standard ) {
+      $standard = new Standard();
+
+          $standard->name = $names[0];
+          $standard->subject = $subject;
+          $standard->gradeLevel = $gradeLevel;
+          $standard->description = $objectives[1];
+      
+          $standard->save();
+    }
+
     return redirect('dashboard');
   }
+
 }
