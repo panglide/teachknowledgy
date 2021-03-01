@@ -10,7 +10,7 @@
       </tr>
       <tr>
         <td>Class:</td>
-        <td>{{ $teacher->gradeLevel }} {{ $teacher->subject }}</td>
+        <td>{{ $classroom->title }}</td>
       </tr>
       <tr>
         <td>Course Unit:</td>
@@ -33,8 +33,8 @@
           </td>
       </tr>
       <tr>
-        <td>Standards:</td>
-        <td>Lesson Objective</td>
+        <td>Standards</td>
+        <td>Objectives</td>
       </tr>
       
        @foreach( $standards as $standard )
@@ -45,7 +45,6 @@
        @endforeach
       <tr>
         <td>Assessment/Evaluation</td>
-        <td><a href="{{url('assessments/1')}}">Assessment 1</a>, <a href="#">Assessment 2</a>, <a href="#">Assessment 3</a></td>
       </tr>
       <tr>
         <td>Materials</td>
@@ -81,15 +80,15 @@
       </tr>
       <tr>
         <td>Resources</td>
-        <td><a href="{{url('/resources')}}">Resources</a></td>
+        
       </tr>
       <tr>
         <td>Guided Practice</td>
-        <td><a href="{{ url('guided_exercise')}}">Exercise 1</a></td>
+        
       </tr>
       <tr>
         <td>Independent Practice</td>
-        <td><a href="{{ url('independent_exercise')}}">Exercise 1</a></td>
+        
       </tr>
       <tr>
         <td>Closure</td>
@@ -106,10 +105,10 @@
         <td>Cross Curricular Connections</td><td>Grouping, adding, algorithms, checking work</td>
       </tr>
       <tr>
-        <td>Remediation Lesson</td><td><a href="{{url('/remediation_lesson')}}">Counting by ones</a></td>
+        <td>Remediation Lesson</td><td></td>
       </tr>
       <tr>
-        <td>Extension Lesson</td><td><a href="{{url('/extension_lesson')}}">Addition to 20</a>, <a href="#">Logic puzzles</a></td>
+        <td>Extension Lesson</td>
       </tr>
       <tr>
         <td>Small Groups</td>
@@ -130,7 +129,7 @@
       </tr>
       <tr>
         <td>Math Center Activities</td>
-        <td><a href="{{url('/centers')}}">Station 1</a>, <a href="#">Station 2</a>, <a href="#">Station 3</a>, <a href="#">Station 4</a>, <a href="#">Station 5</a></td>
+        
       </tr>
 </table>
 @endsection

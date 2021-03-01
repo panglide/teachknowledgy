@@ -18,7 +18,7 @@ class CreateClassroomsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('subject');
-            $table->unsignedInteger('gradeLevel')->nullable();
+            $table->unsignedInteger('gradeLevel');
             $table->timestamps();
 
             $table->foreign('user_id')

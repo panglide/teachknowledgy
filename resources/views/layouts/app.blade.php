@@ -25,7 +25,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+            @if( ! Auth::check() )
                 <a class="navbar-brand" href="{{ url('/') }}">
+                @else
+                <a class="navbar-brand" href="{{ url('/dashboard') }}">
+                @endif
                     {{ config('app.name', 'Laravel') }}
                 </a>
 

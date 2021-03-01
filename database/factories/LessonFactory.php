@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Lesson;
+use App\Standard;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -17,12 +18,10 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Lesson::class, function (Faker $faker) {
-    return [
-        'name' => $faker->word,
-        'subject' => 'Math',
-        'gradeLevel' => 3,
-        'standards' => '1.OA.A.2',
-        'assessments' => $faker->word,
 
+    return [
+        'name' => $faker->lexify('Lesson Name'),
+        'subject' => 'Math',
+        'gradeLevel' => $faker->numberBetween(1, 8)
     ];
 });

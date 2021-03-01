@@ -3,28 +3,30 @@
 
 <div class="container">
     <div class="classroom">
-    <div>{{ $teacher->name }}</div>
-        <div class="classroom__title"><h1>{{ $classroom->title }}</h1></div>
-        <div class="classroom__subject">{{ $classroom->subject }}</div>
+        <div>{{ $classroom->user->name }}</div>
+        <div class="row">
+            <div class="col-8">
+                <div class="classroom__title"><h1>{{ $classroom->title }}</h1></div>
+            </div>
+            <div class="col-4">
+                <div class="classroom__subject"><h1>{{ $classroom->subject }}</h1></div>
+            </div>
+        </div>
     </div>
+
     <div class="classroom__lesson">
         <div class="lesson__links">
-            @foreach( $lessons as $lesson )
-            <ul>
-                <li>
-                    <div class="row">
-                        <div class="col">
-                            <a href="{{ route('lessons.show', $lesson) }}">{{ $lesson->name }}</a>
-                        </div>
-                        @foreach( $standards as $standard )
-                        <div class="col">
-                            <a href="{{ route('standards.show', $standard) }}">{{ $standard->title }}</a>
-                        </div>
-                        @endforeach
-                    </div>
-                </li>
-            </ul>
-            @endforeach
+       
+        @foreach( $lessons as $lesson )
+            <div class="row mt-4">
+                <div class="col-4">
+                    <div class="classroom__lesson--schedule">{{ $classroom->subject }} Lesson Week {{ $week+=1 }}</div>
+                </div>
+                <div class="col-8">
+                    <a href="{{ route('lessons.show', $lesson) }}?classroom={{ $classroom->id }}">{{ $lesson->name }}</a>
+                </div>
+            </div>
+        @endforeach
         </div>
     </div>
 </div>

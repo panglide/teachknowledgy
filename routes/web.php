@@ -15,24 +15,38 @@ Route::get('/', 'PagesController@welcome');
 
 Auth::routes();
 
-Route::view('/', 'welcome');
-
-Route::view('/demo', 'DemoController@index');
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
+
 Route::get('/classrooms', 'ClassroomController@index');
 
-Route::get('/classrooms/{classroom}', 'ClassroomController@show');
+
 
 Route::get('/classrooms.create', 'ClassroomController@create');
 
 Route::post('/classrooms', 'ClassroomController@store');
 
-Route::get('/standards', 'StandardController@index');
+Route::get('/classrooms/{classroom}', 'ClassroomController@show');
 
-Route::get('/demo', 'DemoController@index');
+Route::delete('/classrooms/{classroom}', 'ClassroomController@destroy');
 
-Route::get('/assessments/1', 'AssessmentController@show');
+
+
+
+
+
+Route::post('/lessons', 'LessonController@store');
+
+Route::get('/lessons.create', 'LessonController@create');
 
 Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
+
+
+
+Route::get('/standards', 'StandardController@create');
+
+Route::get('/standads/{standard}', 'StandardController@show')->name('standards.show');
+
+
+

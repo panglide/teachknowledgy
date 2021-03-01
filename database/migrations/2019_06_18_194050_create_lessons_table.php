@@ -17,10 +17,22 @@ class CreateLessonsTable extends Migration
             $table->bigIncrements('id');
             $table->string('subject');
             $table->string('gradeLevel');
-            $table->string('standards');
-            $table->string('assessments');
             $table->string('name');
             $table->timestamps();
+        });
+
+        Schema::create('lesson_standard', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('lesson_id');
+            $table->unsignedBigInteger('standard_id');
+            $table->timestamps();
+
+           $table->unique(['lesson_id', 'standard_id']);
+
+           $table->foreign('standard_id')->references('id')->on('standards')->onDelete('cascade');
+
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            
         });
     }
 
@@ -31,6 +43,8 @@ class CreateLessonsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('lesson_standard');
         Schema::dropIfExists('lessons');
+       
     }
 }

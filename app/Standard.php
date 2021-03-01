@@ -9,6 +9,6 @@ class Standard extends Model
     protected $fillable = ['name', 'description', 'subject', 'gradeLevel'];
 
     public function lesson() {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsToMany(Lesson::class);
     }
 }

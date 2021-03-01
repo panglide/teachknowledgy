@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Lesson;
 use App\Standard;
+use App\Classroom;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -46,20 +47,25 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Lesson $lesson, Standard $standard)
+    public function show(Request $request, Lesson $lesson, Standard $standard)
     {
+        $classroom = $request['classroom'];
+        
+        $classroom = Classroom::findOrFail($classroom);
+
+        $gradeLevel = $classroom->gradeLevel;
+
+        $subject = $classroom->subject;
+        
+        $teacher = $classroom->user;
        
-        $teacher = auth()->user();
+        // $standards = $lesson->standard;
 
-        $gradeLevel = $teacher->gradeLevel;
-
-        $subject = $teacher->subject;
+        $standards = Standard::where( 'gradeLevel', '=', $gradeLevel )
+        ->where( 'subject', '=', $subject )->limit(3)->get();
        
-        $standards = Standard::where('gradeLevel', '=', $gradeLevel )
-        ->where('subject', '=', $subject)->limit(4)->get();
-
     
-        return view('lessons.show2', compact('lesson', 'teacher', 'standards'));
+        return view('lessons.show2', compact('lesson', 'teacher', 'standards', 'classroom'));
     }
 
     /**
