@@ -129,14 +129,14 @@ class StandardController extends Controller
 // Save the Recently Downloaded and Created Standards to DB Table
 
   foreach( $standards as $standard ) {
-      $standard = new Standard();
+      $stand = new Standard();
 
-          $standard->name = $names[0];
-          $standard->subject = $subject;
-          $standard->gradeLevel = $gradeLevel;
-          $standard->description = $objectives[1];
+          $stand->name = $standard[0];
+          $stand->subject = $subject;
+          $stand->gradeLevel = $gradeLevel;
+          $stand->description = $standard[1];
       
-          $standard->save();
+          $stand->save();
     }
 
     return redirect('dashboard');
