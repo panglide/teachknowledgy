@@ -63,7 +63,7 @@ class LessonController extends Controller
 
         $standards = Standard::where( 'gradeLevel', '=', $gradeLevel )
         ->where( 'subject', '=', $subject )->get();
-       dd($standards);
+      
     
         return view('lessons.show2', compact('lesson', 'teacher', 'standards', 'classroom'));
     }
